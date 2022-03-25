@@ -8,6 +8,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from './RootStackPrams';
 import CategorySelector from '../components/CategoriesSelector';
 import {getCategories} from '../store/categories/actions';
+import Header from '../components/Header';
+import {Icons} from '../assets/icons';
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -31,6 +33,7 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header title={'UPayments Store'} Icon={Icons.Search} />
       <CategorySelector items={categories} />
       <Text>{JSON.stringify(filteredProducts)}</Text>
 

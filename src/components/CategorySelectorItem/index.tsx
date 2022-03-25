@@ -15,6 +15,8 @@ const CategorySelectorItem = ({
 }: CategorySelectorItemMiddleName) => {
   return (
     <TouchableOpacity
+      disabled={selectedId === item.id}
+      activeOpacity={0.5}
       onPress={() => {
         onPress();
       }}
@@ -39,10 +41,10 @@ const CategorySelectorItem = ({
 
 const styles = StyleSheet.create({
   itemContainer: {
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    marginHorizontal: 5,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    marginHorizontal: 8,
 
     shadowColor: '#000',
     shadowOffset: {
@@ -55,20 +57,18 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   itemText: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '600',
     color: '#000',
   },
   selectedItemContainer: {
     backgroundColor: '#FFA500',
-    color: '#fff',
   },
   selectedItemText: {
     color: '#fff',
   },
   unSelectedItemContainer: {
     backgroundColor: '#fff',
-    color: '#000',
   },
   unSelectedItemText: {
     color: '#000',

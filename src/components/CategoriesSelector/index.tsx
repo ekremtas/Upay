@@ -36,7 +36,7 @@ function CategorySelector({items}: {items: Category[]}) {
 
 const styles = StyleSheet.create({
   flatListContainer: {
-    padding: 10,
+    padding: 8,
   },
 });
 
