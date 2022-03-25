@@ -2,6 +2,7 @@ import {Product} from './models';
 import {
   ProductActionTypes,
   GET_PRODUCTS,
+  GET_PRODUCT,
   ADD_PRODUCT,
   DELETE_PRODUCT,
   SET_LOADING,
@@ -20,6 +21,25 @@ export function getProducts() {
       .then(result => {
         dispatch({
           type: GET_PRODUCTS,
+          payload: result.data,
+        });
+      })
+      .catch(err => {
+        console.log('Axios err', err);
+      });
+  };
+}
+
+export function getProduct(id: string) {
+  return (dispatch: Dispatch) => {
+    dispatch({
+      type: SET_LOADING,
+    });
+    axios
+      .get(`${baseUrl}/products/${id}`)
+      .then(result => {
+        dispatch({
+          type: GET_PRODUCT,
           payload: result.data,
         });
       })

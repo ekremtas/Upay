@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  text: {fontSize: 25, fontWeight: '700'},
+  text: {color: '#000', fontSize: 25, fontWeight: '700'},
 });
 
 export default Header;

@@ -1,15 +1,16 @@
 import React, {useEffect} from 'react';
-import {Button, SafeAreaView, StyleSheet, Text} from 'react-native';
+import {Button, SafeAreaView, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../store';
 import {getProducts} from '../store/product/actions';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from './RootStackPrams';
+import {RootStackParamList} from '../helpers/RootStackPrams';
 import CategorySelector from '../components/CategoriesSelector';
 import {getCategories} from '../store/categories/actions';
 import Header from '../components/Header';
-import {Icons} from '../assets/icons';
+import Search from '../assets/icons/search.svg';
+import ProductList from '../components/ProductList';
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -33,9 +34,9 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={'UPayments Store'} Icon={Icons.Search} />
+      <Header title={'UPayments Store'} Icon={Search} />
       <CategorySelector items={categories} />
-      <Text>{JSON.stringify(filteredProducts)}</Text>
+      <ProductList items={filteredProducts} />
 
       <Button
         title="Go to detail"

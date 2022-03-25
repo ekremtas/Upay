@@ -2,12 +2,22 @@ import {ProductState} from './models';
 import {
   ProductActionTypes,
   GET_PRODUCTS,
+  GET_PRODUCT,
   ADD_PRODUCT,
   DELETE_PRODUCT,
   SET_LOADING,
 } from './actionTypes';
 const initialState: ProductState = {
   products: [],
+  product: {
+    id: '',
+    name: '',
+    price: 0,
+    category: '',
+    description: '',
+    avatar: '',
+    developerEmail: '',
+  },
   loading: false,
 };
 
@@ -18,7 +28,14 @@ export function productReducer(
   switch (action.type) {
     case GET_PRODUCTS:
       return {
+        ...state,
         products: action.payload,
+        loading: false,
+      };
+    case GET_PRODUCT:
+      return {
+        ...state,
+        product: action.payload,
         loading: false,
       };
     case ADD_PRODUCT:

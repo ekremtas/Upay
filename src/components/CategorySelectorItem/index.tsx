@@ -41,7 +41,7 @@ const CategorySelectorItem = ({
 
 const styles = StyleSheet.create({
   itemContainer: {
-    borderRadius: 8,
+    borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 8,
     marginHorizontal: 8,

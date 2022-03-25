@@ -1,5 +1,5 @@
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   price: number;
   category: string;
@@ -10,5 +10,6 @@ export interface Product {
 
 export interface ProductState {
   products: Product[];
+  product: Product;
   loading: boolean;
 }
