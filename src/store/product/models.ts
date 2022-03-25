@@ -1,11 +1,11 @@
 export interface Product {
   id: number;
-  Name: string;
-  Price: number;
-  Category: string;
-  Description: string;
-  Avatar: string;
-  DeveloperEmail: string;
+  name: string;
+  price: number;
+  category: string;
+  description: string;
+  avatar: string;
+  developerEmail: string;
 }
 
 export interface ProductState {

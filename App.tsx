@@ -1,13 +1,14 @@
 import React from 'react';
 import configureStore from './src/store';
 import {Provider} from 'react-redux';
-import Home from './src/screens/Home';
+import AppNavigator from './src/navigation/AppNavigator';
+
 const store = configureStore();
 
 const App = () => {
   return (
     <Provider store={store}>
-      <Home />
+      <AppNavigator />
     </Provider>
   );
 };

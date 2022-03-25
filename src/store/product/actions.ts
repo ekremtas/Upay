@@ -10,7 +10,7 @@ import axios from 'axios';
 import {Dispatch} from 'redux';
 import {baseUrl} from '../../config';
 
-export function getProduct() {
+export function getProducts() {
   return (dispatch: Dispatch) => {
     dispatch({
       type: SET_LOADING,
