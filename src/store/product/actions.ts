@@ -49,10 +49,23 @@ export function getProduct(id: string) {
   };
 }
 
-export function addProduct(newProduct: Product): ProductActionTypes {
-  return {
-    type: ADD_PRODUCT,
-    payload: newProduct,
+export function addProduct(newProduct: Product, callback: Function) {
+  return (dispatch: Dispatch) => {
+    dispatch({
+      type: SET_LOADING,
+    });
+    axios
+      .post(`${baseUrl}/products`, newProduct)
+      .then(result => {
+        dispatch({
+          type: ADD_PRODUCT,
+          payload: result.data,
+        });
+        callback && callback();
+      })
+      .catch(err => {
+        console.log('Axios err', err);
+      });
   };
 }
 

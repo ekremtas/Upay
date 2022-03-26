@@ -7,13 +7,14 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../helpers/RootStackPrams';
 import CategorySelector from '../components/CategoriesSelector';
-import {getCategories} from '../store/categories/actions';
+import {getCategories, setSelectedCategory} from '../store/categories/actions';
 import Header from '../components/Header';
 import Search from '../assets/icons/search.svg';
 import ProductList from '../components/ProductList';
 import FullPageLoading from '../components/FullPageLoading';
 import TouchableIcon from '../components/TouchableIcon';
 import Plus from '../assets/icons/addButton.svg';
+import {Category} from '../store/categories/models';
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -38,7 +39,13 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header title={'UPayments Store'} Icon={Search} />
-      <CategorySelector items={categories} />
+      <CategorySelector
+        items={[{id: 'all', name: 'all'}, ...categories]}
+        selectedCategory={selectedCategory}
+        onPress={(item: Category) => {
+          dispatch(setSelectedCategory(item));
+        }}
+      />
       {loading ? <FullPageLoading /> : <ProductList items={filteredProducts} />}
 
       <TouchableIcon

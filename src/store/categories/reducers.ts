@@ -5,7 +5,7 @@ import {
   SET_SELECTED_CATEGORY,
 } from './actionTypes';
 const initialState: ProductState = {
-  categories: [{id: 'all', name: 'all'}],
+  categories: [],
   selectedCategory: {id: 'all', name: 'all'},
 };
 

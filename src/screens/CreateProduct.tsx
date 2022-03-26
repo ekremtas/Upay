@@ -7,14 +7,14 @@ import {platformTop, screenWidth} from '../helpers/globalSizes';
 import NavigationBackTouchable from '../components/TouchableIcon/NavigationBackTouchable';
 import ProductForm from '../components/ProductForm';
 
-type ProfileScreenScreenProp = StackNavigationProp<
+type CreateProductScreenProp = StackNavigationProp<
   RootStackParamList,
-  'ProductDetail'
+  'CreateProduct'
 >;
 // type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'CreateProduct'>;
 const CreateProduct = () => {
   //   const {params} = useRoute<ProfileScreenRouteProp>();
-  const navigation = useNavigation<ProfileScreenScreenProp>();
+  const navigation = useNavigation<CreateProductScreenProp>();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,6 +29,7 @@ const CreateProduct = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#fff',
     alignItems: 'center',
   },
   titleContainer: {

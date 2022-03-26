@@ -33,6 +33,7 @@ export function productReducer(
       return {
         ...state,
         products: [...state.products, action.payload],
+        loading: false,
       };
     case DELETE_PRODUCT:
       return {

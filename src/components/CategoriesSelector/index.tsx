@@ -1,21 +1,23 @@
 import React from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppState} from '../../store';
 import {Category} from '../../store/categories/models';
-import {setSelectedCategory} from '../../store/categories/actions';
 import CategorySelectorItem from '../CategorySelectorItem';
 
-function CategorySelector({items}: {items: Category[]}) {
-  const dispatch = useDispatch();
-  const {selectedCategory} = useSelector((state: AppState) => state.category);
-
+function CategorySelector({
+  items,
+  onPress,
+  selectedCategory,
+}: {
+  items: Category[];
+  onPress: Function;
+  selectedCategory: Category;
+}) {
   const renderItem = ({item}: {item: Category}) => {
     return (
       <CategorySelectorItem
         item={item}
         selectedId={selectedCategory.id}
-        onPress={() => dispatch(setSelectedCategory(item))}
+        onPress={() => onPress(item)}
       />
     );
   };
