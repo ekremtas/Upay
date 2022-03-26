@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, View, Text} from 'react-native';
 import {Product} from '../../store/product/models';
 import ProductListItem from '../ProductListItem';
 import {useNavigation} from '@react-navigation/native';
@@ -22,7 +22,7 @@ function ProductList({items}: {items: Product[]}) {
     );
   };
 
-  return (
+  return items.length > 0 ? (
     <FlatList
       contentContainerStyle={styles.flatListContainer}
       data={items}
@@ -31,6 +31,10 @@ function ProductList({items}: {items: Product[]}) {
       showsVerticalScrollIndicator={false}
       numColumns={2}
     />
+  ) : (
+    <View style={styles.messageContainer}>
+      <Text style={styles.messageText}>Product not found</Text>
+    </View>
   );
 }
 
@@ -38,6 +42,8 @@ const styles = StyleSheet.create({
   flatListContainer: {
     padding: 8,
   },
+  messageContainer: {flex: 1, alignItems: 'center', justifyContent: 'center'},
+  messageText: {fontSize: 20, fontWeight: '700', color: '#000'},
 });
 
 export default ProductList;

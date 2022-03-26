@@ -10,6 +10,6 @@ export interface Product {
 
 export interface ProductState {
   products: Product[];
-  product: Product;
+  product?: Product;
   loading: boolean;
 }

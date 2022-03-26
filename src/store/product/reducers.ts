@@ -9,15 +9,6 @@ import {
 } from './actionTypes';
 const initialState: ProductState = {
   products: [],
-  product: {
-    id: '',
-    name: '',
-    price: 0,
-    category: '',
-    description: '',
-    avatar: '',
-    developerEmail: '',
-  },
   loading: false,
 };
 

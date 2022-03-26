@@ -11,6 +11,7 @@ import {getCategories} from '../store/categories/actions';
 import Header from '../components/Header';
 import Search from '../assets/icons/search.svg';
 import ProductList from '../components/ProductList';
+import FullPageLoading from '../components/FullPageLoading';
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -20,7 +21,7 @@ const Home = () => {
   const {categories, selectedCategory} = useSelector(
     (state: AppState) => state.category,
   );
-  const {products} = useSelector((state: AppState) => state.product);
+  const {products, loading} = useSelector((state: AppState) => state.product);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -36,7 +37,7 @@ const Home = () => {
     <SafeAreaView style={styles.container}>
       <Header title={'UPayments Store'} Icon={Search} />
       <CategorySelector items={categories} />
-      <ProductList items={filteredProducts} />
+      {loading ? <FullPageLoading /> : <ProductList items={filteredProducts} />}
 
       <Button
         title="Go to detail"
