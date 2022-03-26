@@ -16,7 +16,12 @@ function ProductList({items}: {items: Product[]}) {
       <ProductListItem
         item={item}
         onPress={() =>
+          item.id &&
           navigation.navigate('ProductDetail', {Id: item.id.toString()})
+        }
+        onPrressEdit={() =>
+          item.id &&
+          navigation.navigate('CreateProduct', {Id: item.id.toString()})
         }
       />
     );

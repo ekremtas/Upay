@@ -1,10 +1,10 @@
 import {Product} from './models';
 import {
-  ProductActionTypes,
   GET_PRODUCTS,
   GET_PRODUCT,
   ADD_PRODUCT,
   DELETE_PRODUCT,
+  CLEAR_PRODUCT,
   SET_LOADING,
 } from './actionTypes';
 import axios from 'axios';
@@ -69,11 +69,30 @@ export function addProduct(newProduct: Product, callback: Function) {
   };
 }
 
-export function deleteProduct(id: number): ProductActionTypes {
+export function deleteProduct(id: string, callback: Function) {
+  return (dispatch: Dispatch) => {
+    dispatch({
+      type: SET_LOADING,
+    });
+    axios
+      .delete(`${baseUrl}/products/${id}`)
+      .then(result => {
+        dispatch({
+          type: DELETE_PRODUCT,
+          meta: {
+            id: result.data.id,
+          },
+        });
+        callback && callback();
+      })
+      .catch(err => {
+        console.log('Axios err', err);
+      });
+  };
+}
+
+export function clearProduct() {
   return {
-    type: DELETE_PRODUCT,
-    meta: {
-      id,
-    },
+    type: CLEAR_PRODUCT,
   };
 }

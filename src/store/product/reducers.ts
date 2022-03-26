@@ -6,6 +6,7 @@ import {
   ADD_PRODUCT,
   DELETE_PRODUCT,
   SET_LOADING,
+  CLEAR_PRODUCT,
 } from './actionTypes';
 const initialState: ProductState = {
   products: [],
@@ -41,6 +42,12 @@ export function productReducer(
         products: state.products.filter(
           product => product.id !== action.meta.id,
         ),
+      };
+    case CLEAR_PRODUCT:
+      delete state.product;
+      return {
+        ...state,
+        loading: false,
       };
     case SET_LOADING:
       return {

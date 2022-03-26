@@ -15,7 +15,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../store';
 import {Category} from '../../store/categories/models';
 import {Product} from '../../store/product/models';
-import {addProduct} from '../../store/product/actions';
+import {addProduct, deleteProduct} from '../../store/product/actions';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../helpers/RootStackPrams';
 import {useNavigation} from '@react-navigation/native';
@@ -29,16 +29,18 @@ const ProductForm = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<CreateProductScreenProp>();
   const {categories} = useSelector((state: AppState) => state.category);
-  const {loading} = useSelector((state: AppState) => state.product);
+  const {loading, product} = useSelector((state: AppState) => state.product);
   return (
     <Formik
       initialValues={{
-        name: '',
-        avatar: '',
-        price: '',
-        description: '',
-        category: '',
-        selectedCategory: categories?.[0],
+        name: product?.name || '',
+        avatar: product?.avatar || '',
+        price: product?.price.toString() || '',
+        description: product?.description || '',
+        category: product?.category || '',
+        selectedCategory:
+          categories.find(cat => cat?.name === product?.category) ||
+          categories?.[0],
       }}
       validationSchema={Yup.object().shape({
         name: Yup.string().required('This field cannot be empty'),
@@ -58,9 +60,13 @@ const ProductForm = () => {
           category: values.selectedCategory.name,
         };
         dispatch(
-          addProduct(newProduct, () => {
-            navigation.pop();
-          }),
+          product?.id
+            ? deleteProduct(product.id, () => {
+                navigation.pop();
+              })
+            : addProduct(newProduct, () => {
+                navigation.pop();
+              }),
         );
       }}>
       {({
@@ -125,7 +131,11 @@ const ProductForm = () => {
               style={styles.submitButton}
               onPress={handleSubmit}>
               <Text style={styles.submitButtonText}>
-                {loading ? 'Sending' : 'Add Product'}
+                {loading
+                  ? 'Sending'
+                  : product
+                  ? 'Delete Product'
+                  : 'Add Product'}
               </Text>
             </TouchableOpacity>
           </View>

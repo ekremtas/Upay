@@ -1,14 +1,16 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity, Image, View} from 'react-native';
 import {screenWidth} from '../../helpers/globalSizes';
 import {Product} from '../../store/product/models';
+import Edit from '../../assets/icons/edit.svg';
 
 interface ProductCardMiddleName {
   item: Product;
   onPress: Function;
+  onPrressEdit: Function;
 }
 
-const ProductCard = ({item, onPress}: ProductCardMiddleName) => {
+const ProductCard = ({item, onPress, onPrressEdit}: ProductCardMiddleName) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -16,6 +18,14 @@ const ProductCard = ({item, onPress}: ProductCardMiddleName) => {
         onPress();
       }}
       style={styles.itemContainer}>
+      <View style={styles.editIconContainer}>
+        <TouchableOpacity
+          style={styles.editIcon}
+          onPress={() => onPrressEdit()}>
+          <Edit width={20} height={20} />
+        </TouchableOpacity>
+      </View>
+
       <Image
         source={{
           uri: item.avatar,
@@ -67,6 +77,8 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: 'orange',
   },
+  editIconContainer: {alignItems: 'flex-end', width: '100%'},
+  editIcon: {paddingHorizontal: 8},
 });
 
 export default ProductCard;

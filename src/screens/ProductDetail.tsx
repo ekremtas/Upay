@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootStackParamList} from '../helpers/RootStackPrams';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {getProduct} from '../store/product/actions';
+import {clearProduct, getProduct} from '../store/product/actions';
 import {AppState} from '../store';
 import {
   platformTop,
@@ -29,6 +29,9 @@ const ProductDetail = () => {
 
   useEffect(() => {
     dispatch(getProduct(params.Id));
+    return () => {
+      dispatch(clearProduct());
+    };
   }, [dispatch, params.Id]);
 
   return (
