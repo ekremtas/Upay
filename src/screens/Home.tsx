@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Button, SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../store';
 import {getProducts} from '../store/product/actions';
@@ -12,6 +12,8 @@ import Header from '../components/Header';
 import Search from '../assets/icons/search.svg';
 import ProductList from '../components/ProductList';
 import FullPageLoading from '../components/FullPageLoading';
+import TouchableIcon from '../components/TouchableIcon';
+import Plus from '../assets/icons/addButton.svg';
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -39,9 +41,10 @@ const Home = () => {
       <CategorySelector items={categories} />
       {loading ? <FullPageLoading /> : <ProductList items={filteredProducts} />}
 
-      <Button
-        title="Go to detail"
-        onPress={() => navigation.navigate('ProductDetail')}
+      <TouchableIcon
+        style={styles.plusIcon}
+        onPress={() => navigation.navigate('CreateProduct')}
+        Icon={Plus}
       />
     </SafeAreaView>
   );
@@ -49,6 +52,13 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: '#fff'},
+  plusIcon: {
+    padding: 10,
+    position: 'absolute',
+    right: 18,
+    bottom: 30,
+    zIndex: 1,
+  },
 });
 
 export default Home;

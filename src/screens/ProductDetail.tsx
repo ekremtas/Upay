@@ -1,12 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {View, StyleSheet, Text, Image, ScrollView} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStackParamList} from '../helpers/RootStackPrams';
@@ -21,7 +14,7 @@ import {
 } from '../helpers/globalSizes';
 import Layout from '../components/Layout';
 import FullPageLoading from '../components/FullPageLoading';
-import LeftArrow from '../assets/icons/leftArrow.svg';
+import NavigationBackTouchable from '../components/TouchableIcon/NavigationBackTouchable';
 
 type ProfileScreenScreenProp = StackNavigationProp<
   RootStackParamList,
@@ -44,11 +37,7 @@ const ProductDetail = () => {
         <FullPageLoading />
       ) : (
         <>
-          <TouchableOpacity
-            style={styles.backIcon}
-            onPress={() => navigation.pop()}>
-            <LeftArrow width={40} height={40} />
-          </TouchableOpacity>
+          <NavigationBackTouchable onPress={() => navigation.pop()} />
           <Image
             source={{
               uri: product?.avatar,
@@ -79,16 +68,8 @@ const styles = StyleSheet.create({
   },
   scroolViewContainer: {
     zIndex: 2,
-    marginTop: 60,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
-  },
-  backIcon: {
-    padding: 10,
-    position: 'absolute',
-    left: 18,
-    top: platformTop,
-    zIndex: 1,
   },
   image: {
     position: 'absolute',
